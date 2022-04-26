@@ -1,0 +1,129 @@
+{% extends 'login.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1 align="center" style="color:#7b197d">Créer Votre Compte</h1>
+
+    {{ form_start(registrationForm,{attr:{novalidate:'novalidate'}}) }}
+
+<section id="multiple-column-form">
+    <div align="center">
+        <div class="col-xl-9 col-md-6 col-sm-12">
+            <div class="card" align="center">
+                <div class="card-content">
+                    <div class="card-body">
+                        <div class="form">
+                            <div class="row">
+
+
+
+
+
+    {# Forumlaire #}
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+        {{ form_row(registrationForm.mail) }}
+            {{ form_errors(registrationForm.mail,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+
+        {{ form_row(registrationForm.mdp, {
+            label: 'Password'
+        }) }}
+            {{ form_errors(registrationForm.mdp,{'attr':{'class':'text-danger'}}) }}
+
+        </div> </div> </div>
+       <div class="col-md-12">
+       <div class="form-control form-control-xl">
+        <div class="position-relative">
+            {{ form_row(registrationForm.nom) }}
+            {{ form_errors(registrationForm.nom,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+
+   <div class="col-md-12">
+    <div class="form-control form-control-xl">
+     <div class="position-relative">
+
+    {{ form_row(registrationForm.prenom) }}
+         {{ form_errors(registrationForm.prenom,{'attr':{'class':'text-danger'}}) }}
+     </div> </div> </div>
+
+
+    <div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+    {{ form_row(registrationForm.datenaissance) }}
+            {{ form_errors(registrationForm.datenaissance,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+    {{ form_row(registrationForm.adresse) }}
+            {{ form_errors(registrationForm.adresse,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+
+    {{ form_row(registrationForm.tel) }}
+            {{ form_errors(registrationForm.tel,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+    {{ form_row(registrationForm.role) }}
+            {{ form_errors(registrationForm.role,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+    {{ form_row(registrationForm.nomequipe) }}
+            {{ form_errors(registrationForm.nomequipe,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+    {{ form_row(registrationForm.etat) }}
+            {{ form_errors(registrationForm.etat,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+    {{ form_row(registrationForm.image) }}
+            {{ form_errors(registrationForm.image,{'attr':{'class':'text-danger'}}) }}
+        </div> </div> </div>
+
+<div class="col-md-12">
+    <div class="form-control form-control-xl">
+        <div class="position-relative">
+
+        {{ form_row(registrationForm.agreeTerms) }}
+        </div> </div> </div>
+
+    {{ form_row(registrationForm.captchaCode) }}
+                            </div> </div> </div> </div> </div> </div> </div> </section>
+        <button type="submit" class="btn btn-primary btn-icon-text">Register</button>
+    {{ form_end(registrationForm) }}
+
+{% endblock %}
+
+

@@ -1,0 +1,198 @@
+{% extends 'backtemplate.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+{% block body %}
+    <div class="card-title">
+    <h1 align="center" style="color:#7b197d">Bienvenue {{ app.user.nom }} </h1>
+
+    </div>
+{# Test #}
+
+    <script src="{{ asset('back/assets/js/jquery.min.js') }}"></script>
+
+
+
+
+
+
+    {# Test  #}
+
+<!----------------->
+
+    <section class="section">
+        <div class="col-md-10">
+            <div>
+                <section id="basic-dropdown">
+                    <div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 50px;">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-content">
+
+                <div class="card-body">
+                    <div>
+
+                        <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+
+                    </div>
+
+                </div>
+
+                </div>
+                </div>
+                </div>
+                    </div>
+                </section>
+                {# --------------- #}
+                <section id="basic-dropdown">
+                    <div class="row" style="display: flex;align-items: center;justify-content: center;margin-top: 50px;">
+                        <div class="card-body">
+                            <div>
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-content">
+                                <div class="dropdown" class="btn-group mb-1">
+                        <button class="btn btn-primary dropdown-toggle me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tri
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin: 0px;">
+                            <a class="dropdown-item" href="{{ path('triNom') }}">TriParNom</a>
+                            <a class="dropdown-item" href="{{ path('triAdresse') }}">TriParAdresse</a>
+                            <a class="dropdown-item" href="{{ path('triPrenom') }}">TriParPrenom</a>
+
+                        </div>
+                        <a href="{{ path('PDFUser') }}"class="btn btn-primary btn-icon-text">Enregistrer PDF</a>
+                        <a href="{{ path('excelUser') }}"class="btn btn-primary btn-icon-text">Enregistrer EXCEL</a>
+
+                                </div> </div> </div> </div> </div> </div> </div></section>
+                <!------- table ------>
+                <div>
+                    <table  class="table table-striped dataTable-table" style="size: 50px" id="tableac">
+                        <thead>
+                        <tr class="dataTable-wrapper">
+
+                            <th style="color: #a56dbf">Nom</th>
+                            <th style="color: #a56dbf">Prenom</th>
+                            <th style="color: #a56dbf">Datenaissance</th>
+                            <th style="color: #a56dbf">Adresse</th>
+                            <th style="color: #a56dbf">Mail</th>
+                            <th style="color: #a56dbf">Tel</th>
+
+                            <th style="color: #a56dbf">Role</th>
+                            <th style="color: #a56dbf">Mdp</th>
+                            <th style="color: #a56dbf">Nomequipe</th>
+                            <th style="color: #a56dbf">Etat</th>
+                            <th style="color: #a56dbf">Image</th>
+                            <th style="color: #a56dbf">actions</th>
+
+                        </tr>
+
+                        </thead>
+                        <tbody id="all">
+                        {% for personne in personnes %}
+                            <script>
+                                $(document).ready(function(){
+                                    $('#search').keyup(function(){
+                                        search_table($(this).val());
+                                    });
+                                    function search_table(value){
+                                        $('#tableac tbody tr').each(function(){
+                                            var found = 'false';
+                                            $(this).each(function(){
+                                                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                                                {
+                                                    found = 'true';
+                                                }
+                                            });
+                                            if(found == 'true')
+                                            {
+                                                $(this).show();
+
+                                            }
+                                            else
+                                            {
+                                                $(this).hide();
+
+                                            }
+                                        });
+                                    }
+                                });
+                            </script>
+                            <tr>
+                                <td class="text-bold-500">{{ personne.nom }}</td>
+                                <td>{{ personne.prenom }}</td>
+                                <td>{{ personne.datenaissance ? personne.datenaissance|date('Y-m-d') : '' }}</td>
+                                <td>{{ personne.adresse }}</td>
+                                <td>{{ personne.mail }}</td>
+                                <td>{{ personne.tel }}</td>
+                                <td>{{ personne.role }}</td>
+                                <td>{{ personne.mdp }}</td>
+                                <td>{{ personne.nomequipe }}</td>
+                                <td>{{ personne.etat }}</td>
+
+                                <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ personne.image) }}"> </td>
+                                <td>
+                                    <a href="{{ path('app_personne_show', {'id': personne.id}) }}" class="btn btn-outline-light"><img src="{{ asset('back/assets/images/samples/profil.png') }}"></a>
+                                    <a href="{{ path('app_personne_edit', {'id': personne.id}) }}" class="btn btn-outline-light"><img src="{{ asset('back/assets/images/samples/edit.png') }}"></a>
+                                    {{ include('personne/_delete_form.html.twig') }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="13">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tbody id="searchtab">
+                        <td></td>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="{{ path('app_personne_new') }}" class="btn btn-outline-light" style="color: cornflowerblue"> <h4>Ajouter Un utilisateur</h4></a>
+    <a href="{{ path('adresse_stat') }}" class="btn btn-outline-light" style="color: cornflowerblue"> <h4>Statistique selon adresse</h4></a>
+    {{ knp_pagination_render(personnes) }}
+{% endblock %}
+{#
+{% block js %}
+    {{ parent() }}
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $(document).ready(function(){
+            $("#search").keyup(function(){
+                var value = $(this).val();
+                console.log("value : ")
+
+                $.ajax({
+                    url : "{{ path('searchStudentx') }}",
+                    type : 'GET',
+                    data: {
+                        'searchValue' : value
+                    },
+                    success : function(retour){
+                        if(retour){
+                            $('#t tbody#searchtab').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#searchtab').append('<tr><td>'+obj.nom+'</td><td> '+obj.prenom+' </td><td>'+obj.datenaissance+ '</td> <td>'+obj.adresse+ '</td><td>'+obj.mail+ '</td><td>'+obj.tel+ '</td><td>'+obj.role+ '</td><td>'+obj.mdp+ '</td><td>'+obj.nomequipe+ '</td><td>'+obj.etat+ '</td><td>'+obj.image+ '</td></tr>');
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#searchtab').empty();
+                            $('#t tbody#searchtab').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
+    #}
