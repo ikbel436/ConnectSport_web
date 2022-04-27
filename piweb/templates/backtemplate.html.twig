@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue ConnectSport </title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('back/assets/css/bootstrap.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/iconly/bold.css')}}">
+
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" href="{{ asset('back/assets/vendors/bootstrap-icons/bootstrap-icons.css')}} ">
+    <link rel="stylesheet" href="{{ asset('back/assets/css/app.css')}} ">
+    <link rel="shortcut icon" href=" {{  asset('back/assets/images/favicon.svg') }}" type="image/x-icon" >
+
+
+</head>
+
+
+<body>
+<div id="app">
+
+    {# Sidebar partie #}
+    <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+            <div>
+                <div>
+                    <h5 style="color:#18347d" align="middle"> CONNECT SPORT</h5>
+                    <div class="d-flex justify-content-between">
+                        <div class="logo" align="center">
+                            <a href="/dashboard"><img src="{{ asset('back/assets/images/logo/connect (2).png') }}" alt="Logo" srcset=""></a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="sidebar-menu">
+                <ul class="menu" >
+                    {#  <li class="sidebar-title"> <h4>Menu</h4></li> #}
+                    <li
+                            class="sidebar-item active ">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-grid-fill"></i>
+                            <span><h5 style="color:#d5dff8">Menu</h5></span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi iconly-boldProfile "></i>
+                            <span><h6>Utilisateurs</h6></span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="/personne/new"><h7>Afficher Utilisateur</h7></a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="component-badge.html"><h7>Ajouter Utilisateur</h7></a>
+                            </li>
+                        </ul>
+                    </li>
+                    {# Personnels #}
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi iconly-boldUser1 "></i>
+                            <span> <h6>Personnels d'équipe</h6></span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="/personne/new"><h7>Afficher Equipe</h7></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    {# EVENEMENTS  #}
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi iconly-boldCalendar"></i>
+                            <span><h6>Evenements Sponsors</h6></span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="/personne/new"><h7>Afficher Evenements</h7></a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="component-badge.html"><h7>Afficher Sponsors</h7></a>
+                            </li>
+                        </ul>
+                    </li>
+                    {# Magasin Produits #}
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi bi-basket-fill"></i>
+                            <span> <h6>Magasins et Produits</h6></span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="/personne/new"><h7>Afficher Magasins</h7></a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="component-badge.html"><h7>Afficher Produits</h7></a>
+                            </li>
+                        </ul>
+                    </li>
+                    {# Actualités #}
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi bi-newspaper"></i>
+                            <span><h6>Actualités sportives</h6></span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="/personne/new">Afficher Actualités</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi iconly-boldMessage"></i>
+                            <span><h6>Réclamations</h6></span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="/personne/new">Afficher Réclamations</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    {# Pages fin---gestion #}
+                    <li
+                            class="sidebar-item active ">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-grid-fill"></i>
+                            <span><h5 style="color:#d5dff8">Pages</h5></span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi bi-bar-chart-fill"></i>
+                            <span>Charts</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="ui-chart-chartjs.html">ChartJS</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="ui-chart-apexcharts.html">Apexcharts</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li
+                            class="sidebar-item  ">
+                        <a href="ui-file-uploader.html" class='sidebar-link'>
+                            <i class="bi bi-cloud-arrow-up-fill"></i>
+                            <span>File Uploader</span>
+                        </a>
+                    </li>
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi bi-map-fill"></i>
+                            <span>Maps</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="ui-map-google-map.html">Google Map</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="ui-map-jsvectormap.html">JS Vector Map</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li
+                            class="sidebar-item  ">
+                        <a href="application-email.html" class='sidebar-link'>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>Email Application</span>
+                        </a>
+                    </li>
+
+                    <li
+                            class="sidebar-item  ">
+                        <a href="application-chat.html" class='sidebar-link'>
+                            <i class="bi bi-chat-dots-fill"></i>
+                            <span>Chat Application</span>
+                        </a>
+                    </li>
+
+                    <li
+                            class="sidebar-item  ">
+                        <a href="application-gallery.html" class='sidebar-link'>
+                            <i class="bi bi-image-fill"></i>
+                            <span>Photo Gallery</span>
+                        </a>
+                    </li>
+
+                    <li
+                            class="sidebar-item  ">
+                        <a href="application-checkout.html" class='sidebar-link'>
+                            <i class="bi bi-basket-fill"></i>
+                            <span>Checkout Page</span>
+                        </a>
+                    </li>
+
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi bi-person-badge-fill"></i>
+                            <span>Authentication</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="auth-login.html">Login</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="auth-register.html">Register</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="auth-forgot-password.html">Forgot Password</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li
+                            class="sidebar-item  has-sub">
+                        <a  class='sidebar-link'>
+                            <i class="bi bi-x-octagon-fill"></i>
+                            <span>Errors</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="error-403.html">403</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="error-404.html">404</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="error-500.html">500</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+        <div class="page-heading">
+
+        </div>
+        <div class="page-content">
+            <div class="col-md-7 grid-margin stretch-card">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+
+
+        <footer>
+            <div class="footer clearfix mb-0 text-muted">
+                <div class="float-start">
+
+                </div>
+                <div class="float-end">
+                    <p>Connect Sport<span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                                href="http://ahmadsaugi.com">Gold Miners</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="{{ asset('back/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+<script src="{{ asset('back/assets/js/bootstrap.bundle.min.js')}}"></script>
+
+<script src="{{ asset('back/assets/vendors/apexcharts/apexcharts.js')}}"></script>
+<script src="{{ asset('back/assets/js/pages/dashboard.js')}}"></script>
+
+<script src="{{ asset('back/assets/js/mazer.js')}}"></script>
+</body>
+
+</html>

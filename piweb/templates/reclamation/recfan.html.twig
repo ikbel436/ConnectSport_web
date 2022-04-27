@@ -1,0 +1,44 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Dateajout</th>
+                <th>Etat</th>
+                <th>NumCommande</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+
+                <td>{{ reclamation.titre }}</td>
+                <td>{{ reclamation.description }}</td>
+                <td>{{ reclamation.dateajout ? reclamation.dateajout|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>{{ reclamation.numCommande }}</td>
+                <td>
+                    <a href="{{ path('app_reclamation_showfan', {'id': reclamation.id}) }}">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_reclamation_newfan') }}';" role="button"> Create New </button>
+
+
+{% endblock %}

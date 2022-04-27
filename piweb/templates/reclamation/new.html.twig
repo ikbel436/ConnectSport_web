@@ -1,0 +1,11 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}New Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Create new Reclamation</h1>
+
+    {{ include('reclamation/_form.html.twig') }}
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_reclamation_index') }}';" role="button"> Back to list </button>
+
+{% endblock %}

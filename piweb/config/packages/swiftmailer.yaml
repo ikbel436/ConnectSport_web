@@ -1,0 +1,7 @@
+swiftmailer:
+    url: '%env(MAILER_URL)%'
+    spool: { type: 'memory' }
+# .env (or override MAILER_URL in .env.local to avoid committing your changes)
+
+# use this to disable email delivery
+

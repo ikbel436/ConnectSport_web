@@ -1,0 +1,87 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}Actualite{% endblock %}
+
+{% block body %}
+    <div class="ritekhela-fancy-title-two">
+        <h2>Détails Actualité</h2>
+    </div>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Titre</th>
+                <td>{{ actualite.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ actualite.description }}</td>
+            </tr>
+            <tr>
+                <th>Dateajout</th>
+                <td>{{ actualite.dateajout ? actualite.dateajout|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{asset('responsable/uploads/images/') ~ actualite.image}}"  width="250" height="250"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_actualite_fan') }}';" role="button"> Back to list </button>
+<br><br>
+
+    <div class="ritekhela-fancy-title-two">
+        <h2>Comment here</h2>
+
+    </div>
+    {{ form_start(formc) }}
+    <div class="row justify-space-between py-2">
+        <div class="col-lg-4 mx-auto">
+            <div class="input-group input-group-outline mb-4">
+                <label class="form-label">Commentaire: </label>
+                {{ form_widget(formc.comment, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(formc.comment) }}
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-12 d-flex justify-content-end">
+
+        <button class="btn">{{ button_label|default('Send') }}</button>
+
+    </div>
+    {{ form_end(formc) }}
+
+
+    <div class="ritekhela-fancy-title-two">
+        <h2>All Comments</h2>
+    </div>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center row">
+            <div class="col-md-8">
+                {% for commentaire in commentaires %}
+                <div class="d-flex flex-column comment-section">
+                    <div class="bg-white p-2">
+                        <div class="d-flex flex-row user-info"><img class="rounded-circle" src="{{asset('responsable/uploads/images/') ~ commentaire.idPer.getImage() }}" width="40">
+                            <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{ commentaire.idPer.getNom() }}  {{ commentaire.idPer.getPrenom() }}</span><span class="date text-black-50">{{ commentaire.dateajout ? commentaire.dateajout|date('Y-m-d') : '' }}</span></div>
+                        </div>
+                        <div class="mt-2">
+                            <p class="comment-text">{{ commentaire.comment }}</p>
+                        </div>
+                    </div>
+
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

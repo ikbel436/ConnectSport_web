@@ -1,0 +1,11 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}New Categorie{% endblock %}
+
+{% block body %}
+    <h1>Create new Categorie</h1>
+
+    {{ include('categorie/_form.html.twig') }}
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_categorie_index') }}';" role="button"> Back to list </button>
+
+{% endblock %}
