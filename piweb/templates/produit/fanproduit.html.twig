@@ -1,0 +1,68 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}List Produit{% endblock %}
+
+{% block body %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <h1>List Produit </h1>
+
+            <div class="ritekhela-main-content">
+                <div class="ritekhela-main-section ritekhela-fixture-list-full">
+                    <div class="container">
+                        <div class="row">
+    {% for produit in produits %}
+                            <!--// Full Section //-->
+                            <div class="col-md-12">
+                                <!--// Gallery //-->
+                                <div class="ritekhela-gallery ritekhela-gallery-view1">
+                                    <ul class="row">
+                                        <li class="col-md-12">
+                                            <figure>
+                                                <a data-fancybox-group="group" href=" {{ path('app_commande_new', {'id': produit.idp}) }} "class="dropdown-item border-radius-md"> <img style="width: 500px " height="500" src="{{ asset('uploads/' ~  produit.image) }} "> <i class="fa fa-plus ritekhela-bgcolor"></i> </a>
+                                                <figcaption>
+
+                                                </figcaption>
+                                            </figure>
+                                            <h2>nom:{{ produit.nomP }}</h2>
+                                            <h2>prix:{{ produit.prix }}</h2>
+                                            <h2>categorie:{{ produit.categorie }}</h2>
+                                            <h2><button class="ritekhela-banner-btn" id="click{{produit.idp}}" onclick="">QR</button></h2>
+                                           <li class="add-cart active"><a href="{{path("cart_add",{id:produit.idp})}}">Add to cart</a></li>
+
+
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <script>
+        {% if qrCode is defined %}
+
+        $('#click{{produit.idp}}').on('click',function (){
+            {% if (app.request.uri != ("http://localhost/piweb/public/index.php/produit/qr/"~produit.idp)) %}
+            window.location.replace("{{ path('qr', {'id': produit.idp})}}");
+            {% endif %}
+            Swal.fire({
+                title: 'Connect Sport',
+                text: 'scan this qr to view infos',
+                imageUrl: '{{ qrCode }}',
+                imageWidth: 300,
+                imageHeight: 300,
+                imageAlt: 'Custom image',
+            })
+
+        })
+        {% else %}
+        window.location.replace("{{ path('qr', {'id': produit.idp})}}");
+        {% endif %}
+    </script>
+        {% endfor %}
+
+
+
+{% endblock %}

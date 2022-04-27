@@ -1,0 +1,47 @@
+{% extends 'backtemplate.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+{% block body %}
+    <div class="card-title">
+        <h1 align="center" style="color:#7b197d">Liste des produits</h1>
+    </div>
+    <section class="section">
+        <div class="col-md-12">
+            <div>
+
+                <div>
+                    <table  class="table table-striped dataTable-table" style="size: 50px">
+                        <thead>
+                        <tr class="dataTable-wrapper">
+
+
+                            <th>Nom</th>
+                            <th>prix</th>
+                            <th>categorie</th>
+                            <th>image</th>
+
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        {% for produit in produits %}
+                            <tr>
+                                
+                                <td>{{ produit.NomP }}</td>
+                                <td>{{ produit.prix }}</td>
+                                <td>{{ produit.categorie }}</td>
+                                 <td><img src="{{asset('uploads/') ~ produit.image}}"  width="100" height="100"></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="13">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}New Produit{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+
+    <h1>Create new Produit</h1>
+
+
+        {{ form_start(form,{attr:{novalidate:'novalidate','class':'text-start'}}) }}
+
+
+    <div class="input-group input-group-outline my-3">
+
+               <label class="form-label">Nom Produit</label>
+               {{ form_widget(form.nomP,{attr:{'class':'form-control'}}) }}
+                {{ form_errors(form.nomP,{attr:{'class':'form-control'}}) }}
+
+            </div>
+
+    <div class="input-group input-group-outline my-3">
+
+        <label class="form-label">Prix</label>
+        {{ form_widget(form.prix,{attr:{'class':'form-control'}}) }}
+        {{ form_errors(form.prix,{attr:{'class':'form-control'}}) }}
+
+    </div>
+    <label class="form-label"><h5>Image</h5></label>
+    <div class="input-group input-group-outline my-3">
+
+
+        {{ form_widget(form.image,{attr:{'class':'btn bg-gradient-primary w-auto me-2'}}) }}
+        {{ form_errors(form.image,{attr:{'class':'btn bg-gradient-primary w-auto me-2'}}) }}
+
+
+    </div>
+
+    <label class="form-label"><h5>Categorie</h5></label>
+    <div class="input-group input-group-outline my-3">
+
+
+        {{ form_widget(form.categorie,{attr:{'class':'btn bg-gradient-primary dropdown-toggle'}}) }}
+        {{ form_errors(form.categorie,{attr:{'class':'btn bg-gradient-primary dropdown-toggle'}}) }}
+
+    </div>
+
+    <label class="form-label"><h5>Magasin</h5></label>
+    <div class="input-group input-group-outline my-3">
+
+
+        {{ form_widget(form.idm,{attr:{'class':'btn bg-gradient-primary dropdown-toggle'}}) }}
+        {{ form_errors(form.idm,{attr:{'class':'btn bg-gradient-primary dropdown-toggle'}}) }}
+
+    </div>
+
+
+        <div class="text-center">
+            <button class="btn bg-gradient-primary my-4 mb-2">{{ button_label|default('Save') }}</button>
+        </div>
+        {{ form_end(form) }}
+
+
+
+    <a  class="btn bg-gradient-primary my-4 mb-2" href="{{ path('app_produit_index') }}">back to list</a>
+{% endblock %}

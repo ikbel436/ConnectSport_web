@@ -1,0 +1,40 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Magasin index{% endblock %}
+
+{% block body %}
+    <h1>Magasin index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idm</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Nombrebloc</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for magasin in magasins %}
+            <tr>
+                <td>{{ magasin.idm }}</td>
+                <td>{{ magasin.nom }}</td>
+                <td>{{ magasin.adresse }}</td>
+                <td>{{ magasin.nombrebloc }}</td>
+                <td>
+                    <a href="{{ path('app_magasin_show', {'idm': magasin.idm}) }}">show</a>
+                    <a href="{{ path('app_magasin_edit', {'idm': magasin.idm}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_magasin_new') }}">Create new</a>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('excel') }}';" role="button"> EXCEL </button>
+{% endblock %}

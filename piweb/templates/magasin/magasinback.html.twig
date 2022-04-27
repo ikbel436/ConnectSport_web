@@ -1,0 +1,45 @@
+{% extends 'backtemplate.html.twig' %}
+
+{% block title %}Liste des Magasins{% endblock %}
+{% block body %}
+    <div class="card-title">
+        <h1 align="center" style="color:#7b197d">Liste des Magasins</h1>
+    </div>
+    <section class="section">
+        <div class="col-md-12">
+            <div>
+
+                <div>
+                    <table  class="table table-striped dataTable-table" style="size: 50px">
+                        <thead>
+                        <tr class="dataTable-wrapper">
+
+
+                            <th>Nom</th>
+                            <th>Adresse</th>
+                            <th>Nombrebloc</th>
+
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        {% for magasin in magasins %}
+                            <tr>
+                                <td>{{ magasin.idm }}</td>
+                                <td>{{ magasin.nom }}</td>
+                                <td>{{ magasin.adresse }}</td>
+                                <td>{{ magasin.nombrebloc }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="13">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
