@@ -1,0 +1,104 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Personnel index{% endblock %}
+
+{% block body %}
+    <h1>Personnel </h1>
+    <script src="{{ asset('responsable/assets/js/jquery.min.js') }}"></script>
+    <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+    <table class="table" id="tableac">
+        <thead>
+            <tr>
+
+                <th>Cin</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Datenaissance</th>
+                <th>Adresse</th>
+                <th>Mail</th>
+                <th>Tel</th>
+                <th>Salaire</th>
+                <th>Image</th>
+                <th>Sport</th>
+                <th>Categorie</th>
+                <th>Role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for personnel in personnels %}
+            <script>
+                $(document).ready(function(){
+                    $('#search').keyup(function(){
+                        search_table($(this).val());
+                    });
+                    function search_table(value){
+                        $('#tableac tbody tr').each(function(){
+                            var found = 'false';
+                            $(this).each(function(){
+                                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                                {
+                                    found = 'true';
+                                }
+                            });
+                            if(found == 'true')
+                            {
+                                $(this).show();
+
+                            }
+                            else
+                            {
+                                $(this).hide();
+
+                            }
+                        });
+                    }
+                });
+            </script>
+            <tr>
+
+                <td>{{ personnel.cin }}</td>
+                <td>{{ personnel.nom }}</td>
+                <td>{{ personnel.prenom }}</td>
+                <td>{{ personnel.datenaissance ? personnel.datenaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ personnel.adresse }}</td>
+                <td>{{ personnel.mail }}</td>
+                <td>{{ personnel.tel }}</td>
+                <td>{{ personnel.salaire }}</td>
+                <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ personnel.image) }}"> </td>
+                <td>{{ personnel.sport }}</td>
+                <td>{{ personnel.categorie }}</td>
+                <td>{{ personnel.role }}</td>
+                <td>
+
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_personnel_delete', {'id': personnel.id}) }}';" role="button"> delete
+
+                    </button>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_personnel_edit', {'id': personnel.id}) }}';" role="button"> update
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_personnel_new') }}';" role="button"> ajouter
+    </button>
+    <a  class="btn btn-danger btn-sm" href="{{ path('excel') }}">
+        <i class="fa fa-book"></i>
+        Générer excel
+    </a>
+    <a  class="btn btn-danger btn-sm" href="{{ path('personnel_stat') }}">
+        <i class="fa fa-book"></i>
+       Statistiques
+    </a>
+    <a  class="btn btn-danger btn-sm" href="{{ path('AfficheVoyPDF') }}">
+        <i class="fa fa-book"></i>
+        Générer pdf
+    </a>
+    {{ knp_pagination_render(personnels) }}
+{% endblock %}
