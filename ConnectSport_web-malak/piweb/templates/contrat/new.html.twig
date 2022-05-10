@@ -1,0 +1,61 @@
+{% extends 'respo.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}New Sponsor{% endblock %}
+
+{% block body %}
+    {{ form_start(form,{attr:{novalidate:'novalidate'}}) }}
+    <h1>Create new Contrat</h1>
+
+
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">NOM</label>
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nom) }}
+
+        </div>
+    </div>
+
+
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">datecontrat</label>
+            {{ form_widget(form.datecontrat, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.datecontrat) }}
+
+        </div>
+    </div>
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">type</label>
+            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.type) }}
+
+        </div>
+    </div>
+
+
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">idp</label>
+            {{ form_widget(form.idp , {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.idp) }}
+
+        </div>
+    </div>
+
+
+
+
+
+
+    {{ form_row(form.captchaCode) }}
+
+
+    <div class="col-12 d-flex justify-content-end">
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_contrat_index') }}">back to list</a>
+{% endblock %}

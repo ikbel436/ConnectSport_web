@@ -1,0 +1,39 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Reclamation</h1>
+
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th>Titre</th>
+                <td>{{ reclamation.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ reclamation.description }}</td>
+            </tr>
+            <tr>
+                <th>Dateajout</th>
+                <td>{{ reclamation.dateajout ? reclamation.dateajout|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ reclamation.etat }}</td>
+            </tr>
+            <tr>
+                <th>NumCommande</th>
+                <td>{{ reclamation.numCommande }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reclamation_fan') }}">back to list</a>
+
+
+
+
+{% endblock %}

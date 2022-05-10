@@ -1,0 +1,96 @@
+{% extends 'backtemplate.html.twig' %}
+
+{% block title %}Personne{% endblock %}
+
+{% block body %}
+    <h1 align="middle" style="color:#7b197d">Profil Utilisateur</h1>
+<section class="section">
+
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div>
+    <table class="table">
+        <tbody>
+
+            <tr>
+                <th style="color: #a56dbf">Nom</th>
+                <td>{{ personne.nom }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Prenom</th>
+                <td>{{ personne.prenom }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Datenaissance</th>
+                <td>{{ personne.datenaissance ? personne.datenaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Adresse</th>
+                <td>{{ personne.adresse }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Mail</th>
+                <td>{{ personne.mail }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Tel</th>
+                <td>{{ personne.tel }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Role</th>
+                <td>{{ personne.role }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Mdp</th>
+                <td>{{ personne.mdp }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Nomequipe</th>
+                <td>{{ personne.nomequipe }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Etat</th>
+                <td>{{ personne.etat }}</td>
+            </tr>
+            <tr>
+                <th style="color: #a56dbf">Image</th>
+                <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ personne.image) }}"> </td>
+            </tr>
+        </tbody>
+    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div class="col-12 d-flex justify-content-end">
+    <a href="{{ path('app_personne_edit', {'id': personne.id}) }}"class="btn btn-primary btn-icon-text"><img src="{{ asset('back/assets/images/samples/updated.png') }}">Modifier</a>
+    {{ include('personne/_delete_form.html.twig') }}
+
+        <div class="button">
+            <a href="{{ path('desactiver', {'id': personne.id}) }}"class="btn btn-primary btn-icon-text">Desactiver</a>
+
+            <a href="{{ path('activer', {'id': personne.id}) }}"class="btn btn-primary btn-icon-text">Activer</a>
+
+        </div>
+        <div>
+        <div class="button">
+            <a href="{{ path('admin', {'id': personne.id}) }}"class="btn btn-primary btn-icon-text">Rendre Admin</a>
+
+
+
+        </div>
+        </div>
+
+
+    </div>
+
+ <div>
+   <a href="{{ path('app_personne_index') }}" style="color: cornflowerblue"> <h4>Retour Liste Affichage</h4></a>
+ </div>
+
+
+
+{% endblock %}

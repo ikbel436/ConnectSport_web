@@ -1,0 +1,66 @@
+{% extends 'backtemplate.html.twig' %}
+{% block body %}
+
+
+    <body>
+    <div >
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="card-title">sponsor de: {{ fours.nom }} {{ fours.prenom }} </h5>
+                    {#  <form method="post" action="{{ path('rechlike') }}">
+                    <label>Rechercher</label>
+                    <input type="text" name="search"><input type="submit" value="Recherche">
+                </form>#}
+                   <h4> nombre des evenements:{{ stos|length }}</h4>
+                    <table class="table" id="tableac">
+                        <thead>
+                        <tr>
+
+                            <th>Nom</th>
+                            <th>Lieu</th>
+                            <th>Date</th>
+                            <th>Non Sponsors</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr {% for i in stos %}>
+                            <td>
+                                {{ i.nom }}
+                            </td>
+                            <td>
+                                {{ i.lieu }}
+                            </td>
+                            <td>
+                                {{ i.date|date }}
+                            </td>
+                            <td>
+                                {{ i.ids.nom }}
+
+                            </td>
+
+                        </tr{% endfor %}>
+                        </tbody>
+                        <script>
+
+                            $(document).ready(function() {
+                                $('#example').DataTable( {
+                                    "order": [[ 3, "desc" ]]
+                                } );
+                            } );
+                        </script>
+
+                    </table>
+
+
+
+                </div></div></div></div>
+
+
+    </body>
+    </html>
+{% endblock %}

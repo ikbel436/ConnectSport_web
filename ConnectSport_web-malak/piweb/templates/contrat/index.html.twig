@@ -1,0 +1,89 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Contrat index{% endblock %}
+
+{% block body %}
+    <h1>Contrat </h1>
+    <script src="{{ asset('responsable/assets/js/jquery.min.js') }}"></script>
+    <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+    <table class="table"  id="tableac">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Datecontrat</th>
+                <th>Type</th>
+                <th>Personnel</th>
+                <th>Role</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contrat in contrats %}
+            <script>
+                $(document).ready(function(){
+                    $('#search').keyup(function(){
+                        search_table($(this).val());
+                    });
+                    function search_table(value){
+                        $('#tableac tbody tr').each(function(){
+                            var found = 'false';
+                            $(this).each(function(){
+                                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                                {
+                                    found = 'true';
+                                }
+                            });
+                            if(found == 'true')
+                            {
+                                $(this).show();
+
+                            }
+                            else
+                            {
+                                $(this).hide();
+
+                            }
+                        });
+                    }
+                });
+            </script>
+            <tr>
+
+                <td>{{ contrat.nom }}</td>
+                <td>{{ contrat.datecontrat ? contrat.datecontrat|date('Y-m-d') : '' }}</td>
+                <td>{{ contrat.type }}</td>
+                <td>{{ contrat.idp.nom }}</td>
+                <td>{{ contrat.idp.role }}</td>
+                <td>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_contrat_delete', {'id': contrat.id}) }}';" role="button"> delete
+
+                    </button>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_contrat_edit', {'id': contrat.id}) }}';" role="button"> update
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_contrat_new') }}';" role="button"> ajouter
+    </button>
+    <a  class="btn btn-danger btn-sm" href="{{ path('contrat_excel') }}">
+        <i class="fa fa-book"></i>
+        Générer excel
+    </a>
+    <a  class="btn btn-danger btn-sm" href="{{ path('contrat_stat') }}">
+        <i class="fa fa-book"></i>
+        Statistiques
+    </a>
+    <a  class="btn btn-danger btn-sm" href="{{ path('PDF') }}">
+        <i class="fa fa-book"></i>
+        Generer PDF
+    </a>
+
+{% endblock %}

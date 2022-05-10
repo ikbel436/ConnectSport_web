@@ -1,0 +1,113 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Evenement index{% endblock %}
+
+{% block body %}
+    <h1>Evenement index</h1>
+    <script src="{{ asset('responsable/assets/js/jquery.min.js') }}"></script>
+
+
+    <input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+
+    <table class="table" id="tableac">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Lieu</th>
+                <th>Date</th>
+                <th>Nbparticipation</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Image</th>
+                <th>actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for evenement in evenements %}
+            <script>
+                $(document).ready(function(){
+                    $('#search').keyup(function(){
+                        search_table($(this).val());
+                    });
+                    function search_table(value){
+                        $('#tableac tbody tr').each(function(){
+                            var found = 'false';
+                            $(this).each(function(){
+                                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+                                {
+                                    found = 'true';
+                                }
+                            });
+                            if(found == 'true')
+                            {
+                                $(this).show();
+
+                            }
+                            else
+                            {
+                                $(this).hide();
+
+                            }
+                        });
+                    }
+                });
+            </script>
+            <!--Start of Tawk.to Script-->
+            <script type="text/javascript">
+                var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+                (function(){
+                    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+                    s1.async=true;
+                    s1.src='https://embed.tawk.to/625fee02b0d10b6f3e6e7778/1g13bjea3';
+                    s1.charset='UTF-8';
+                    s1.setAttribute('crossorigin','*');
+                    s0.parentNode.insertBefore(s1,s0);
+                })();
+            </script>
+            <!--End of Tawk.to Script-->
+            <tr>
+
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.nbparticipation }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.prix }}</td>
+
+               {#  <td> <img src="{{evenement.image}}"  > </td>#}
+                <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ evenement.image) }}"> </td>
+
+                <td>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_evenement_delete', {'id': evenement.id}) }}';" role="button"> delete
+
+                    </button>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_evenement_edit', {'id': evenement.id}) }}';" role="button"> update
+                    </button>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+
+        {% endfor %}
+        {{ knp_pagination_render(evenements) }}
+        </tbody>
+    </table>
+    <a  class="btn btn-danger btn-sm" href="{{ path('calendar') }}">
+        <i class="far fa-calendar-alt">
+        </i>
+        Afficher calendrier
+    </a>
+    <a  class="btn btn-danger btn-sm" href="{{ path('AfficheVoyPDF') }}">
+        <i class="fa fa-book"></i>
+        Générer pdf
+    </a>
+
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_evenement_new') }}';" role="button"> ajouter
+    </button>
+
+{% endblock %}

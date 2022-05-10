@@ -1,0 +1,44 @@
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+
+    <table id="t" class="table">
+        <thead>
+        <tr>
+
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Dateajout</th>
+            <th>Catégorie</th>
+            <th>Etat</th>
+            <th>NumCommande</th>
+            <th>Personne</th>
+
+        </tr>
+        </thead>
+        <tbody id="all">
+        {% for reclamation in reclamations %}
+            <tr>
+
+                <td>{{ reclamation.titre }}</td>
+                <td>{{ reclamation.description }}</td>
+                <td>{{ reclamation.dateajout ? reclamation.dateajout|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.idCat.getNom() }}</td>
+                <td>{{ reclamation.etat }}</td>
+                <td>{{ reclamation.numCommande }}</td>
+                <td>{{ reclamation.idPer.getNom() }}</td>
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+
+
+
+
+
+{% endblock %}

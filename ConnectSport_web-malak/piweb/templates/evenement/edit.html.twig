@@ -1,0 +1,92 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Edit Evenement{% endblock %}
+
+{% block body %}
+    <h1>Edit Evenement</h1>
+    {{ form_start(form) }}
+
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;" > NOM</label>
+            <div>
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nom) }}
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">lieu</label>
+            {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.lieu) }}
+
+        </div>
+    </div>
+
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">date</label>
+            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.date) }}
+
+        </div>
+    </div>
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">nbparticipation</label>
+            {{ form_widget(form.nbparticipation, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nbparticipation) }}
+
+        </div>
+    </div>
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">description</label>
+
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
+
+        </div>
+    </div>
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">prix</label>
+
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.prix) }}
+
+        </div>
+    </div>
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">image</label>
+
+            {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.image) }}
+
+        </div>
+    </div>
+    <div class="col-md-6 pr-1">
+        <div class="input-group input-group-dynamic mb-4">
+            <label style="color:#7b197d;font-weight:600;">ids</label>
+
+            {{ form_widget(form.ids, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.ids) }}
+
+        </div>
+    </div>
+
+    <div class="col-12 d-flex justify-content-end">
+        <button class="btn btn-outline-primary">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(form) }}
+
+
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_evenement_index') }}';" role="button"> list
+    </button>
+
+    {{ include('evenement/_delete_form.html.twig') }}
+{% endblock %}

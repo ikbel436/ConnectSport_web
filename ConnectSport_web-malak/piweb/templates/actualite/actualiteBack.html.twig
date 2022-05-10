@@ -1,0 +1,43 @@
+
+{% extends 'backtemplate.html.twig' %}
+
+{% block title %}Actualite index{% endblock %}
+
+{% block body %}
+    <h1>Actualite index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Dateajout</th>
+            <th>Image</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for actualite in actualites %}
+            <tr>
+
+                <td>{{ actualite.titre }}</td>
+                <td>{{ actualite.description }}</td>
+                <td>{{ actualite.dateajout ? actualite.dateajout|date('Y-m-d') : '' }}</td>
+                <td><img src="{{ asset('uploads/' ~ actualite.image) }}"  width="100" height="100"></td>
+
+                <td>
+                    <a href="{{ path('app_actualite_show', {'id': actualite.id}) }}">show</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

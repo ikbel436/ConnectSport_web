@@ -1,0 +1,80 @@
+
+
+
+{% block body %}
+    <img src='data:image;base64,<?= {{ img64 }};?>' style=" height: 100px; width: 100px; " align="top|left"/>
+
+    {% block title %}Evenement {% endblock %}
+
+
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #7b197d;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #dddddd;}
+
+        #customers tr:hover {background-color: #00a5bb;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #7b197d;
+            color: white;
+        }
+    </style>
+
+    <table class="table" id="customers">
+        <thead>
+        <tr>
+
+            <th>Nom</th>
+            <th>Lieu</th>
+            <th>Date</th>
+            <th>Nbparticipation</th>
+            <th>Description</th>
+            <th>Prix</th>
+
+
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for evenement in destination %}
+
+            <tr>
+
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.nbparticipation }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.prix }}</td>
+
+                {#  <td> <img src="{{evenement.image}}"  > </td>#}
+
+
+
+            </tr>
+
+            {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

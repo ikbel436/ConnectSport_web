@@ -1,0 +1,54 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Sponsor index{% endblock %}
+
+{% block body %}
+    <h1>Liste Sponsors </h1>
+
+    <table id="bootstrap-data-table-export" class="table table-striped table-bordered" style="size: 50px">
+        <thead>
+            <tr>
+
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Datenaissance</th>
+                <th>Adresse</th>
+                <th>Tel</th>
+                <th>Mail</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sponsor in sponsors %}
+            <tr>
+
+                <td>{{ sponsor.nom }}</td>
+                <td>{{ sponsor.prenom }}</td>
+                <td>{{ sponsor.datenaissance ? sponsor.datenaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ sponsor.adresse }}</td>
+                <td>{{ sponsor.tel }}</td>
+                <td>{{ sponsor.mail }}</td>
+
+               {#  <td>
+                    <a href="{{ path('app_sponsor_show', {'id': sponsor.id}) }}">show</a>
+                    <a href="{{ path('app_sponsor_edit', {'id': sponsor.id}) }}">edit</a>
+                </td>#}
+                <td>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_sponsor_delete', {'id': sponsor.id}) }}';" role="button"> delete
+
+                    </button>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_sponsor_edit', {'id': sponsor.id}) }}';" role="button"> update
+                    </button>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_sponsor_new') }}';" role="button"> ajouter
+    </button>
+   {#  <a href="{{ path('app_sponsor_new') }}">Create new</a>#}
+{% endblock %}

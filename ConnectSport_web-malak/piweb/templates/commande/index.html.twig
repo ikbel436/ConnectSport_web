@@ -1,0 +1,39 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Commande index{% endblock %}
+
+{% block body %}
+    <h1>Commande index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idc</th>
+                <th>Date</th>
+                <th>Adresse</th>
+                <th>Prix</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.idc }}</td>
+                <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
+                <td>{{ commande.adresse }}</td>
+                <td>{{ commande.prix }}</td>
+                <td>
+                    <a href="{{ path('app_commande_show', {'idc': commande.idc}) }}">show</a>
+                    <a href="{{ path('app_commande_edit', {'idc': commande.idc}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commande_new') }}">Create new</a>
+{% endblock %}

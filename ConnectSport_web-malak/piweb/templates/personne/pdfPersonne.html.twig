@@ -1,0 +1,90 @@
+<center><h1> AFFICHAGE DES UTILISATEURS </h1></center>
+
+<style>
+    body{
+        font:normal 15px/20PX "Liberation sans", Arial, Helvetica, sans-serif;
+        color:#585858;
+    }
+    img{
+        width:300px;
+        margin:10px;
+        border: solid 5px #E8E8E8;
+
+    }
+</style>
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 170%;
+    }
+
+    #customers td, #customers th {
+        border: 1px solid #7b197d;
+        padding: 8px;
+    }
+
+    #customers tr:nth-child(even){background-color: #dddddd;}
+
+    #customers tr:hover {background-color: #00a5bb;}
+
+    #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #7b197d;
+        color: white;
+    }
+</style>
+
+<img src='data:image;base64,<?= {{ img64 }};?>' />
+<div class="card-body table-responsive p-0">
+
+
+    <div>
+        <table id="customers">
+            <thead>
+            <tr>
+
+                <th style="color: #a56dbf">Nom</th>
+                <th style="color: #a56dbf">Prenom</th>
+                <th style="color: #a56dbf">Datenaissance</th>
+                <th style="color: #a56dbf">Adresse</th>
+                <th style="color: #a56dbf">Mail</th>
+                <th style="color: #a56dbf">Tel</th>
+
+                <th style="color: #a56dbf">Role</th>
+                <th style="color: #a56dbf">Nomequipe</th>
+                <th style="color: #a56dbf">Etat</th>
+
+
+            </tr>
+
+            </thead>
+            <tbody>
+            {% for personne in user %}
+                <tr>
+                    <td>{{ personne.nom }}</td>
+                    <td>{{ personne.prenom }}</td>
+                    <td>{{ personne.datenaissance ? personne.datenaissance|date('Y-m-d') : '' }}</td>
+                    <td>{{ personne.adresse }}</td>
+                    <td>{{ personne.mail }}</td>
+                    <td>{{ personne.tel }}</td>
+                    <td>{{ personne.role }}</td>
+                    <td>{{ personne.nomequipe }}</td>
+                    <td>{{ personne.etat }}</td>
+
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="13">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+</div>

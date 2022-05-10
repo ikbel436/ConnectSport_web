@@ -1,0 +1,81 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Personnel{% endblock %}
+
+{% block body %}
+    <h1>Personnel</h1>
+<style>
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    </style>
+
+     <table  id="customers" class="table">
+        <tbody>
+
+            <tr>
+                <th>Cin</th>
+                <td>{{ personnel.cin }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ personnel.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ personnel.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Datenaissance</th>
+                <td>{{ personnel.datenaissance ? personnel.datenaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ personnel.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ personnel.mail }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ personnel.tel }}</td>
+            </tr>
+            <tr>
+                <th>Salaire</th>
+                <td>{{ personnel.salaire }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ personnel.image) }}"> </td>
+            </tr>
+            <tr>
+                <th>Sport</th>
+                <td>{{ personnel.sport }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ personnel.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td>{{ personnel.role }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_personnel_index') }}';" role="button"> back
+    </button>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_personnel_edit', {'id': personnel.id}) }}';" role="button"> edit
+    </button>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('sms') }}';" role="button"> sms
+    </button>
+
+
+    {{ include('personnel/_delete_form.html.twig') }}
+<iframe style="border:0; width: 100%; height: 350px;" class="img-fluid" src="https://maps.google.com/maps?q=+{{personnel.adresse}}+&hl=fr&z=14&amp;output=embed" frameborder="0" allowfullscreen></iframe>
+<div class="map-wrapper-300 mb-3">
+</div>
+    {% endblock %}

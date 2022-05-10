@@ -1,0 +1,33 @@
+
+
+{% block body %}
+
+
+    <h1 align="center">Actualité</h1><hr>
+
+
+    <table id="t" class="table">
+
+        <tbody id="all">
+
+            <tr>
+<td style="text-align: center">
+                <h3 style="text-align: center"> Titre :  <h2>{{ actualite.getTitre() }}</h2> </h3>
+                <img src='data:image;base64,<?= {{ pngbase64 }};?>' width="500" height="300" style="display: block;margin-left: auto; margin-right: auto; "/>
+                <h3> Description :  <h2>{{ actualite.getDescription() }}</h2> </h3>
+
+                <h3> Date d'ajout :  <h2>{{ actualite.getDateajout() ? actualite.getDateajout()|date('Y-m-d') : '' }}</h2> </h3>
+</td>
+            </tr>
+
+
+        </tbody>
+
+    </table>
+
+
+
+
+
+
+{% endblock %}

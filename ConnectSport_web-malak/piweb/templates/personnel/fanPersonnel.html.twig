@@ -1,0 +1,57 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}Personnel index{% endblock %}
+
+{% block body %}
+    <h1>Liste Personnel </h1>
+    <center>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Trier les evenements par
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="{{ path('tri') }}">nom</a> <a class="dropdown-item" href="{{ path('trip') }}">salaire</a>
+
+                </div>
+            </div>
+        </div>
+        <br> <br>
+    </center>
+            <div class="ritekhela-main-content">
+                <div class="ritekhela-main-section ritekhela-fixture-list-full">
+                    <div class="container">
+                        <div class="row">
+    <form method="post" action="{{ path('rechlike') }}">
+        <label>Rechercher</label>
+        <input type="text" name="search"><input type="submit" value="Recherche">
+    </form>
+    {{ knp_pagination_render(personnels) }}
+    {% for personnel in personnels %}
+
+                            <!--// Full Section //-->
+                            <div class="col-md-12">
+                                <!--// Gallery //-->
+                                <div class="ritekhela-gallery ritekhela-gallery-view1">
+                                    <ul class="row">
+                                        <li class="col-md-12">
+                                            <figure>
+                                                <a data-fancybox-group="group" href=" {{ path('app_show', {'id': personnel.id}) }} "class="dropdown-item border-radius-md"> <img style="width: 500px " height="500" src="{{ asset('uploads/' ~  personnel.image) }} "> <i class="fa fa-plus ritekhela-bgcolor"></i> </a>
+                                                <figcaption>
+
+                                                </figcaption>
+                                            </figure>
+                                            <h2>{{ personnel.nom }}</h2>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+{% endblock %}

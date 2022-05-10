@@ -1,0 +1,54 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Sponsor{% endblock %}
+
+{% block body %}
+    <h1>Sponsor</h1>
+    <div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">
+            <strong class="card-title"></strong>
+        </div>
+        <div class="table-wrap">
+             <table  class="table table-responsive-xl">
+        <tbody>
+
+            <tr>
+                <th>Nom</th>
+                <td>{{ sponsor.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ sponsor.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Datenaissance</th>
+                <td>{{ sponsor.datenaissance ? sponsor.datenaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ sponsor.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ sponsor.tel }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ sponsor.mail }}</td>
+            </tr>
+        </tbody>
+    </table>
+        </div>
+        </div>
+            <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_sponsor_index') }}';" role="button"> list
+            </button>
+            <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_sponsor_edit', {'id': sponsor.id}) }}';" role="button"> edit
+            </button>
+
+
+            <div class="col-12 d-flex justify-content-end">
+    {{ include('sponsor/_delete_form.html.twig') }}
+            </div>
+    </div>
+{% endblock %}

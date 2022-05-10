@@ -1,0 +1,82 @@
+{% extends 'backtemplate.html.twig' %}
+
+{#  {% block title %}Evenement index{% endblock %} #}
+
+{% block body %}
+    {#  <font face="Roman,Times"> evenement </FONT>#}
+    <h1>Evenement index</h1>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 170%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #7b197d;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #dddddd;}
+
+        #customers tr:hover {background-color: #00a5bb;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #7b197d;
+            color: white;
+        }
+    </style>
+
+
+
+    <table class="table"  id="customers">
+
+        <thead>
+
+        <tr>
+
+            <th>Nom</th>
+            <th>Lieu</th>
+            <th>Date</th>
+            <th>Nbparticipation</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Image</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for evenement in event %}
+            <tr>
+
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.nbparticipation }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.prix }}</td>
+                <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ evenement.image) }}"> </td>
+                <td> <a href="{{ path('showReserv',{'id':evenement.id}) }}" class="btn btn-primary" href="#" role="button" >reservation</a> </td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button>
+        <a  class="btn btn-danger btn-sm" href="{{ path('chartjs') }}">
+            Afficher statistiques
+        </a>
+    </button>
+
+
+
+    {% endblock %}

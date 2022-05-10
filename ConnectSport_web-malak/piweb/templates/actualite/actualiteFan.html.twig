@@ -1,0 +1,118 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}Actualite index{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center">Actualite index</h1>
+    <h1> <strong class="ritekhela-color"> Lastest News:</strong></h1>
+    {% block search %}
+        <form>
+            <div class="input-group input-group-dynamic mb-8">
+                <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
+
+                <input class="form-control" id="search" placeholder="Search" type="text" >
+
+            </div>
+        </form>
+    {% endblock %}
+<br><br>
+
+
+
+    <!--// Player //-->
+    <div class="ritekhela-team ritekhela-team-view1" style="text-align: center">
+
+        <ul id="all" class="row">
+            {% for actualite in actualites %}
+            <li class="col-md-4">
+                <figure>
+                    <img src="{{ asset('uploads/' ~ actualite.image) }}" alt="" width="200" height="200">
+                    <figcaption>
+                        <a href="#" class="fab fa-facebook-f"></a>
+                        <a href="#" class="fab fa-twitter"></a>
+                        <a href="#" class="fab fa-instagram"></a>
+                        <a href="#" class="fab fa-dribbble"></a>
+                    </figcaption>
+                </figure>
+                <div class="ritekhela-team-view1-text">
+                    <h2>{{ actualite.titre }}</h2>
+                    <span>{{ actualite.dateajout ? actualite.dateajout|date('Y-m-d') : '' }}</span>
+                    <p>{{ actualite.description }}</p>
+
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_actualite_actf', {'id': actualite.id}) }}';" role="button"> PDF </button>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_actualite_showfan', {'id': actualite.id}) }}';" role="button"> See More </button>
+
+                </div>
+            </li>
+
+
+
+
+            {% endfor %}
+        </ul>
+        <ul id="search" class="row"></ul>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('searchAct') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        if(retour){
+                            $('ul#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+
+                                $('ul#all').hide();
+
+                                $('ul#search').append("<li class='col-md-4'>");
+
+                                    $('ul#search').append("<figure>");
+
+                                        var p="/piweb/public/responsable/uploads/images/"+obj.image;
+                                $('ul#search').append("<img src="+p+">");
+                                $('ul#search').append(" <figcaption><a href='#' class='fab fa-facebook-f'></a><a href='#' class='fab fa-twitter'></a><a href='#' class='fab fa-instagram'></a><a href='#' class='fab fa-dribbble'></a></figcaption>");
+                                $('ul#search').append("</figure>");
+                                $('ul#search').append("<div class='ritekhela-team-view1-text'>");
+                                $('ul#search').append(" <h2>"+obj.titre+"</h2>");
+                                $('ul#search').append(" <span>"+obj.dateajout+"</span>");
+                                $('ul#search').append(" <p>"+obj.description+"</p>");
+                                $('ul#search').append("<button class='btn btn-outline-primary' type='submit' onclick='window.location.href = "+obj.id+"'; role='button'> pdf </button>");
+                                $('ul#search').append("</div></li>");
+
+                                // <td>'+obj.description+'</td><td>'+obj.dateajout+'  </td><td></td><td><a href="article/'+obj.id+'">show</a> </br><a href="article/'+obj.id+'/edit">edit</a></td></tr>');
+                            });
+                        }
+                        //$('#t tbody#search').append('<tr><td> '+obj.lieu+'  </td><td>    '+obj.nbPlace+'  </td><td>'+obj.descriptions+' </td><td>'+obj.dateEvent+' </td><td>'+obj.getcategory+' </td><td>'+obj.Description+'</td><td><td><a href="event/'+obj.idEvent+'/edit">Modifier</a></td></tr>');
+                        else
+                        {
+                            $('ul#all').show();
+                            $('ul#search').empty();
+                            $('ul#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+
+
+
+
+
+        });
+    </script>
+
+{% endblock %}

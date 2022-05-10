@@ -1,0 +1,129 @@
+{% extends 'respo.html.twig' %}
+
+{% block title %}Produit index{% endblock %}
+
+
+
+{% block body %}
+    <h1>Produit index</h1>
+
+    {% block search %}
+        <li class="nav-item">
+            <h3>Search</h3>
+            <form class="search-bar">
+                <input type="text" id="search" class="form-control" placeholder="Enter keywords">
+
+            </form>
+
+        </li>
+    {% endblock %}
+
+    <button class="btn btn-primary dropdown-toggle me-1" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Tri
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin: 0px;">
+        <a class="dropdown-item" href="{{ path('triNom') }}">TriParNom</a>
+        <a class="dropdown-item" href="{{ path('triPrix') }}">TriParPrix</a>
+    </div>
+    <table id="t" class="table">
+        <thead>
+            <tr>
+
+                <th>NomP</th>
+                <th>Prix</th>
+                <th>Categorie</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="all">
+        {% for produit in produits %}
+            <tr>
+
+                <td>{{ produit.nomP }}</td>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.categorie }}</td>
+            
+                 <td><img src="{{asset('uploads/') ~ produit.image}}"  width="100" height="100"></td>
+                <td>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_produit_show', {'idp': produit.idp}) }}';" role="button"> Afficher
+
+                    </button>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_produit_edit', {'idp': produit.idp}) }}';" role="button"> Modifier
+
+                    </button>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <tbody id="search"></tbody>
+    </table>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script>
+        $( document ).ready(function() {
+            $("#search").keyup(function(e){
+                /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                var value = $(this).val();
+                /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                $.ajax({
+                    /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                    url : "{{ path('searchProduit') }}",
+                    /* La méthode utilisée pour transférer les données est GET */
+                    type : 'GET',
+                    /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                    data: {
+                        'searchValue' : value
+                    },
+                    /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                    success : function(retour){
+                        if(retour){
+                            $('#t tbody#search').empty();
+                            $.each(JSON.parse(retour), function(i, obj) {
+                                $('#t tbody#all').hide();
+                                $('#t tbody#search').append("<tr>");
+                                $('#t tbody#search').append("<td>"+obj.nomP+"</td>");
+                                $('#t tbody#search').append("<td>"+obj.prix+"</td>");
+                                $('#t tbody#search').append("<td>"+obj.categorie+"</td>");
+
+                                //var img = "<img src='' />";
+                                var p="/uploads/"+obj.image;
+                                var img = "<img src="+p+" width='100' height='100'/>";
+                                $('#t tbody#search').append(" <td>"+img+"</td>");
+
+                                $('#t tbody#search').append("<td><a href="+obj.idp+">show</a> </br><a href="+obj.idp+">edit</a></td>");
+                                $('#t tbody#search').append("</tr>");
+                            });
+                        }
+                        else
+                        {
+                            $('#t tbody#all').show();
+                            $('#t tbody#search').empty();
+                            $('#t tbody#search').fadeIn('fast');
+                        }
+                    },
+                });
+                return false;
+            });
+        });
+    </script>
+
+
+
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_produit_new') }}';" role="button"> Ajouter </button>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('produit_list') }}';" role="button"> PDF </button>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('Produits_stats') }}';" role="button"> Statistiques </button>
+
+    {{ knp_pagination_render(produits) }}
+
+
+
+{% endblock %}

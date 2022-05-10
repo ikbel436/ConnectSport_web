@@ -1,0 +1,26 @@
+{% block title %}Contrat index{% endblock %}
+
+{% block body %}
+<h1>Contrat </h1>
+<script src="{{ asset('responsable/assets/js/jquery.min.js') }}"></script>
+<input type="text" class="form-control" placeholder="Search…" aria-label="Search"id="search">
+<table class="table"  id="tableac">
+    <thead>
+    <tr>
+
+        <th>Nom</th>
+        <th>Datecontrat</th>
+        <th>Type</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for contrat in perso %}
+
+    <tr>
+
+        <td>{{ contrat.nom }}</td>
+        <td>{{ contrat.datecontrat ? contrat.datecontrat|date('Y-m-d') : '' }}</td>
+        <td>{{ contrat.type }}</td>
+    {% endfor %}
+    {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'respo.html.twig' %}
+{% block body %}
+    <h1>Statistiques</h1>
+<div id="div_histogram"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    {{ gc_language('fr') }}
+
+    {{ gc_draw(piechart, 'div_histogram') }}
+</script>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_reclamation_index') }}';" role="button"> Back to list </button>
+{% endblock %}

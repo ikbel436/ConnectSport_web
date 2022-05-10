@@ -1,0 +1,63 @@
+{% extends 'backtemplate.html.twig' %}
+
+{% block title %}Contrat index{% endblock %}
+
+{% block body %}
+    <h1>Contrat </h1>
+    <style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #customers td, #customers th {
+            border: 1px solid #7b197d;
+            padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #dddddd;}
+
+        #customers tr:hover {background-color: #00a5bb;}
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #7b197d;
+            color: white;
+        }
+    </style>
+    <table id="customers"  class="table">
+        <thead>
+        <tr>
+
+            <th>Nom</th>
+            <th>Datecontrat</th>
+            <th>Type</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for contrat in contrat %}
+            <tr>
+
+                <td>{{ contrat.nom }}</td>
+                <td>{{ contrat.datecontrat ? contrat.datecontrat|date('Y-m-d') : '' }}</td>
+                <td>{{ contrat.type }}</td>
+                <td>
+                    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_contrat_per', {'nom': contrat.idp.nom}) }}';" role="button"> personnel
+
+                    </button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}Personnel{% endblock %}
+
+{% block body %}
+    <h1>Personnel</h1>
+
+    <table class="table">
+        <tbody>
+
+        <tr>
+            <th>Nom</th>
+            <td>{{ personnel.nom }}</td>
+        </tr>
+        <tr>
+            <th>Prenom</th>
+            <td>{{ personnel.prenom }}</td>
+        </tr>
+        <tr>
+            <th>Datenaissance</th>
+            <td>{{ personnel.datenaissance ? personnel.datenaissance|date('Y-m-d') : '' }}</td>
+        </tr>
+
+        <tr>
+            <th>Salaire</th>
+            <td>{{ personnel.salaire }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>{{ personnel.image }}</td>
+        </tr>
+        <tr>
+            <th>Sport</th>
+            <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ personnel.image) }}"> </td>
+        </tr>
+        <tr>
+            <th>Categorie</th>
+            <td>{{ personnel.categorie }}</td>
+        </tr>
+        <tr>
+            <th>Role</th>
+            <td>{{ personnel.role }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-outline-primary" type="submit" onclick="window.location.href = '{{ path('app_personnel_fan') }}';" role="button"> back
+    </button>
+
+
+
+
+{% endblock %}

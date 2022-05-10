@@ -1,0 +1,128 @@
+{% extends 'fan.html.twig' %}
+
+{% block title %}event index{% endblock %}
+{% block body %}
+      <center>
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Trier les evenements par
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="{{ path('tri') }}">nom</a> <a class="dropdown-item" href="{{ path('trip') }}">prix</a>
+
+                </div>
+            </div>
+        </div>
+        <br> <br>
+    </center>
+
+
+<form method="post"      action="{{ path('rechlike') }}">
+
+
+
+        <input class="form-control mr-sm-2"  placeholder="Search" type="search" type="text" name="search">
+    <button class="btn btn-outline-success my-2 my-sm-0"  type="submit">Search</button>
+</form>
+    <div class="navigation">
+        {{ knp_pagination_render(even) }}
+    </div>
+    {% for evenement in even %}
+
+        <div class="ritekhela-main-content" >
+            <div class="ritekhela-main-section ritekhela-fixture-list-full">
+                <div class="container">
+                    <div class="row">
+
+                        <!--// Full Section //-->
+                        <div class="col-md-12">
+                            <!--// Gallery //-->
+                            <div class="ritekhela-gallery ritekhela-gallery-view1">
+                                <ul class="row" >
+
+                                    <li class="col-md-12">
+                                        <figure>
+                                          {% if evenement.nbparticipation %}
+                                            <a data-fancybox-group="group" href="{{ path('app_reservation_new', {'id': evenement.id}) }}" class="dropdown-item border-radius-md"> <img style="width: 500px " height="500" src="{{ asset('uploads/' ~ evenement.image) }} "> <i class="fa fa-plus ritekhela-bgcolor"></i> </a>
+                                            <figcaption>
+
+                                            </figcaption>
+
+    {% else %}
+        <div class="col-md-3 mb-3"></div>
+        <div class="col-md-6 mb-6 center-block">
+
+            <div class="card overflow-hidden shadow"><img class="card-img-top" src="{{ asset('uploads/' ~ evenement.image) }}" alt=""></div>
+            <div class="card-body py-4 px-3">
+                <div class="d-flex flex-column flex-lg-row justify-content-between mb-3">
+
+
+                </div>
+            </div>
+        </div>
+        <button type="" class="btn btn-danger">Complet</button>
+        {% endif %}
+
+                                        </figure>
+                                        <h2>{{ evenement.nom }}                                          <h2>{{ evenement.prix }}dt</h2></h2>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+
+    {#  <table class="table">
+    { {% for evenement in even %}
+    <li class="col-md-4">
+     <table>
+        <img src="{{app.request.basepath}}/uploads/documents/{{evenement.image}}" alt="">
+     </table>
+    </li>
+    {% endfor %}
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Lieu</th>
+            <th>Date</th>
+            <th>Nbparticipation</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for evenement in even %}
+            <tr>
+                <td>{{ evenement.id }}</td>
+                <td>{{ evenement.nom }}</td>
+                <td>{{ evenement.lieu }}</td>
+                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.nbparticipation }}</td>
+                <td>{{ evenement.description }}</td>
+                <td>{{ evenement.prix }}</td>
+                <td>   <img style="width: 100px" src="{{ asset('uploads/' ~ evenement.image) }}"> </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>#}
+
+
+
+{% endblock %}
